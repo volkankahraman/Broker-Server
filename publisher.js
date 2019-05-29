@@ -22,7 +22,7 @@ client.on('connect', function () {
 });
 
 app.get('/',urlEncodedParser, function (req, res) {
-    console.log(req.query.status);
+    console.log(req.query);
     client.publish('led',req.query.status);
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({
@@ -44,7 +44,7 @@ app.get('/',urlEncodedParser, function (req, res) {
 });
 
 app.post('/',urlEncodedParser, function (req, res) {
-    console.log(req.query.status);
+    console.log(req.query);
     client.publish('led',req.query.status);
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({
