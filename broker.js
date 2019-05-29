@@ -1,7 +1,7 @@
 var mosca = require('mosca');
 
 var settings = {
-  port: 1883
+  port: process.env.PORT || 1883
 };
 
 var server = new mosca.Server(settings);
