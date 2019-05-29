@@ -18,6 +18,7 @@ client.on('connect', function () {
 var status = {
     'bool':true
 }
+
 app.get('/', function (req, res) {
     if(status.bool){
         client.publish('led',"ac");
@@ -29,7 +30,6 @@ app.get('/', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(status));
 });
-}
 app.post('/', function (req, res) {
     if(status.bool){
         client.publish('led',"ac");
