@@ -1,7 +1,13 @@
 var mqtt = require('mqtt');
 var express = require('express');
+var bodyParser = require('body-parser');
 
 var app = express();
+
+var urlEncodedParser = bodyParser.urlencoded({
+    extended: false
+});
+
 
 var port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Sunucu ${port} portunda çalışıyor!`))
@@ -15,18 +21,9 @@ client.on('connect', function () {
         console.log(`acılıyor`);
         //client.publish('led',"ac");
 });
-var status = {
-    'bool':true
-}
 
-app.get('/', function (req, res) {
-    if(status.bool){
-        client.publish('led',"ac");
-        status.bool=false;
-    }else{
-        client.publish('led',"kapat");
-        status.bool=true;
-    }
+app.get('/',urlEncodedParser, function (req, res) {
+    client.publish('led',req.body.status);
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({
         "payload": {
@@ -36,7 +33,7 @@ app.get('/', function (req, res) {
               "items": [
                 {
                   "simpleResponse": {
-                    "textToSpeech": "this is a simple response"
+                    "textToSpeech": req.body.status+"ımıyorum"
                   }
                 }
               ]
@@ -46,14 +43,8 @@ app.get('/', function (req, res) {
       }));
 });
 
-app.post('/', function (req, res) {
-    if(status.bool){
-        client.publish('led',"ac");
-        status.bool=false;
-    }else{
-        client.publish('led',"kapat");
-        status.bool=true;
-    }
+app.post('/',urlEncodedParser, function (req, res) {
+    client.publish('led',req.body.status);
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({
         "payload": {
@@ -63,7 +54,7 @@ app.post('/', function (req, res) {
               "items": [
                 {
                   "simpleResponse": {
-                    "textToSpeech": "this is a simple response"
+                    "textToSpeech": req.body.status+"ıyorum"
                   }
                 }
               ]
