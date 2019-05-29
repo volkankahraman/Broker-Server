@@ -16,7 +16,7 @@ client.on('connect', function () {
         //client.publish('led',"ac");
 });
 var acik = true;
-app.get('/', function (req, res) {
+app.post('/', function (req, res) {
     if(acik){
         client.publish('led',"ac");
         acik=false;
