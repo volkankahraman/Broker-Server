@@ -1,9 +1,10 @@
 var mosca = require('mosca');
 
 var settings = {
-  port: process.env.PORT || 1883
+  port: Number(process.env.PORT) || 1883
 };
-
+console.log(process.env.PORT);
+console.log(Number(process.env.PORT));
 var server = new mosca.Server(settings);
 
 server.on('clientConnected', function(client) {
