@@ -3,10 +3,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 var app = express();
-
-var urlEncodedParser = bodyParser.urlencoded({
+app.use( bodyParser.json() );  
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
-});
+  })); 
+  
 
 
 var port = process.env.PORT || 8080;
@@ -21,7 +22,7 @@ client.on('connect', function () {
         //client.publish('led',"ac");
 });
 
-app.get('/',urlEncodedParser, function (req, res) {
+app.get('/', function (req, res) {
     console.log(req.params);
     console.log(req.body);
     console.log(req.query);
@@ -45,7 +46,7 @@ app.get('/',urlEncodedParser, function (req, res) {
       }));
 });
 
-app.post('/',urlEncodedParser, function (req, res) {
+app.post('/', function (req, res) {
     console.log(req.params);
     console.log(req.body);
     console.log(req.query);
