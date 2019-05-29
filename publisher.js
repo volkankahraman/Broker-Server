@@ -29,3 +29,15 @@ app.get('/', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(status));
 });
+}
+app.post('/', function (req, res) {
+    if(status.bool){
+        client.publish('led',"ac");
+        status.bool=false;
+    }else{
+        client.publish('led',"kapat");
+        status.bool=true;
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(status));
+});
