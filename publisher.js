@@ -28,8 +28,24 @@ app.get('/', function (req, res) {
         status.bool=true;
     }
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(status));
+    res.end(JSON.stringify({
+        "payload": {
+          "google": {
+            "expectUserResponse": true,
+            "richResponse": {
+              "items": [
+                {
+                  "simpleResponse": {
+                    "textToSpeech": "this is a simple response"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }));
 });
+
 app.post('/', function (req, res) {
     if(status.bool){
         client.publish('led',"ac");
@@ -39,5 +55,20 @@ app.post('/', function (req, res) {
         status.bool=true;
     }
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(status));
+    res.end(JSON.stringify({
+        "payload": {
+          "google": {
+            "expectUserResponse": true,
+            "richResponse": {
+              "items": [
+                {
+                  "simpleResponse": {
+                    "textToSpeech": "this is a simple response"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }));
 });
