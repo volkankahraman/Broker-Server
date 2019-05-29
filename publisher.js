@@ -47,9 +47,11 @@ app.get('/', function (req, res) {
 });
 
 app.post('/', function (req, res) {
-    console.log(req.params);
-    console.log(req.body);
-    console.log(req.query);
+    var responseTxt;
+    if(req.body.queryResult.parameters.status == "ac")
+        responseTxt = "Işığı açıyorum";
+    else
+        responseTxt= "Işığı açıyorum";
     
     
     client.publish('led',req.body.queryResult.parameters.status);
@@ -62,7 +64,7 @@ app.post('/', function (req, res) {
               "items": [
                 {
                   "simpleResponse": {
-                    "textToSpeech": req.body.queryResult.parameters.status+"ıyorum"
+                    "textToSpeech": responseTxt
                   }
                 }
               ]
