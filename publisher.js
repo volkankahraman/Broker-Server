@@ -62,7 +62,7 @@ app.post('/', function (req, res) {
               "items": [
                 {
                   "simpleResponse": {
-                    "textToSpeech": req.query.status+"ıyorum"
+                    "textToSpeech": req.body.queryResult.parameters.status+"ıyorum"
                   }
                 }
               ]
