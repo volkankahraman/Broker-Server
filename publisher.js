@@ -51,7 +51,7 @@ app.post('/', function (req, res) {
     if(req.body.queryResult.parameters.status == "ac")
         responseTxt = "Işığı açıyorum";
     else
-        responseTxt= "Işığı açıyorum";
+        responseTxt= "Işığı kapatıyorum";
     
     
     client.publish('led',req.body.queryResult.parameters.status);
