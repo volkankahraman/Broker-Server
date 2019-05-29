@@ -22,8 +22,8 @@ client.on('connect', function () {
 });
 
 app.get('/',urlEncodedParser, function (req, res) {
-    console.log(req.body);
-    client.publish('led',req.body.status);
+    console.log(req.query.status);
+    client.publish('led',req.query.status);
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({
         "payload": {
@@ -33,7 +33,7 @@ app.get('/',urlEncodedParser, function (req, res) {
               "items": [
                 {
                   "simpleResponse": {
-                    "textToSpeech": req.body.status+"ımıyorum"
+                    "textToSpeech": req.query.status+"ımıyorum"
                   }
                 }
               ]
@@ -44,8 +44,8 @@ app.get('/',urlEncodedParser, function (req, res) {
 });
 
 app.post('/',urlEncodedParser, function (req, res) {
-    console.log(req.body);
-    client.publish('led',req.body.status);
+    console.log(req.query.status);
+    client.publish('led',req.query.status);
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({
         "payload": {
@@ -55,7 +55,7 @@ app.post('/',urlEncodedParser, function (req, res) {
               "items": [
                 {
                   "simpleResponse": {
-                    "textToSpeech": req.body.status+"ıyorum"
+                    "textToSpeech": req.query.status+"ıyorum"
                   }
                 }
               ]
