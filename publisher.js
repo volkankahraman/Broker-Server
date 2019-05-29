@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 var urlEncodedParser = bodyParser.urlencoded({
-    extended: false
+    extended: true
 });
 
 
@@ -14,7 +14,6 @@ app.listen(port, () => console.log(`Sunucu ${port} portunda çalışıyor!`))
     
 
 var client = mqtt.connect("mqtt://1ab76102:8c048afe8b4538e8@broker.shiftr.io",{clientId: 'javascript'});
-acik = false;
 client.on('connect', function () {
     console.log('client has connected!');
         // TODO: Log the answer in a database
@@ -23,6 +22,7 @@ client.on('connect', function () {
 });
 
 app.get('/',urlEncodedParser, function (req, res) {
+    console.log(req.body);
     client.publish('led',req.body.status);
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({
@@ -44,6 +44,7 @@ app.get('/',urlEncodedParser, function (req, res) {
 });
 
 app.post('/',urlEncodedParser, function (req, res) {
+    console.log(req.body);
     client.publish('led',req.body.status);
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({
