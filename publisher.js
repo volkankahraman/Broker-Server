@@ -22,6 +22,8 @@ client.on('connect', function () {
 });
 
 app.get('/',urlEncodedParser, function (req, res) {
+    console.log(req.params);
+    console.log(req.body);
     console.log(req.query);
     client.publish('led',req.query.status);
     res.setHeader('Content-Type', 'application/json');
@@ -44,7 +46,11 @@ app.get('/',urlEncodedParser, function (req, res) {
 });
 
 app.post('/',urlEncodedParser, function (req, res) {
-    console.log(req);
+    console.log(req.params);
+    console.log(req.body);
+    console.log(req.query);
+    
+    
     client.publish('led',req.query.status);
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({
