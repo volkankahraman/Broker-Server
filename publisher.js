@@ -1,8 +1,18 @@
 var mqtt = require('mqtt');
-var client  = mqtt.connect('mqtt://192.168.1.174');
+var client = mqtt.connect('ws://akilli-ev-nodejs.herokuapp.com');
+acik= false;
 client.on('connect', function () {
-setInterval(function() {
-client.publish('myTopic', 'Hello mqtt');
-console.log('Message Sent');
-}, 5000);
+    setInterval(function () {
+        if (!acik) {
+            client.publish('led', 'ac');
+            console.log('ac');
+            acik = true;
+        } else {
+            client.publish('led', 'kapat');
+            console.log('kapat');
+            acik= false;
+        }
+
+        
+    }, 1000);
 });
