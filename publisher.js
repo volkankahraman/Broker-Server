@@ -44,7 +44,7 @@ app.get('/',urlEncodedParser, function (req, res) {
 });
 
 app.post('/',urlEncodedParser, function (req, res) {
-    console.log(req.query);
+    console.log(req);
     client.publish('led',req.query.status);
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({
