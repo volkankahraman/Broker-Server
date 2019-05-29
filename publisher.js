@@ -15,16 +15,17 @@ client.on('connect', function () {
         console.log(`acılıyor`);
         //client.publish('led',"ac");
 });
-var acik = true;
-app.post('/', function (req, res) {
-    if(acik){
+var status = {
+    'bool':true
+}
+app.get('/', function (req, res) {
+    if(status.bool){
         client.publish('led',"ac");
-        acik=false;
+        status.bool=false;
     }else{
         client.publish('led',"kapat");
-        acik=true;
+        status.bool=true;
     }
     res.setHeader('Content-Type', 'application/json');
-    res.send(acik);
-    res.end();
+    res.end(JSON.stringify(status));
 });
