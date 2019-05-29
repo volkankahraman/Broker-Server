@@ -52,8 +52,8 @@ app.post('/', function (req, res) {
     console.log(req.query);
     
     
-    client.publish('led',req.query.status);
-    res.setHeader('Content-Type', 'application/json');
+    client.publish('led',req.body.queryResult.parameters.status);
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.end(JSON.stringify({
         "payload": {
           "google": {
